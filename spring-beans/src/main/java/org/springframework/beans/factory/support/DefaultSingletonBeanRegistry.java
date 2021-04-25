@@ -231,6 +231,21 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					this.suppressedExceptions = new LinkedHashSet<>();
 				}
 				try {
+					/**
+					 * 创建Bean对象
+					 * 会执行：下面的表达式：
+					 * @see org.springframework.beans.factory.support.AbstractBeanFactory#doGetBean(java.lang.String, java.lang.Class, java.lang.Object[], boolean)
+					 * sharedInstance = getSingleton(beanName, () -> {
+					 * 	try {
+					 * 		return createBean(beanName, mbd, args);
+					 *   }catch (BeansException ex) {
+					 * 		destroySingleton(beanName);
+					 * 		throw ex;
+					 *   }
+					 * });
+					 * 真正执行的是里面的createBean(beanName, mbd, args);
+					 * @see org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#createBean(java.lang.String, org.springframework.beans.factory.support.RootBeanDefinition, java.lang.Object[])
+					 */
 					singletonObject = singletonFactory.getObject();
 					newSingleton = true;
 				}

@@ -193,6 +193,7 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 			Class<?> targetClass = (target != null ? target.getClass() : null);
 
 			// Get the interception chain for this method.
+			// 1. 获取拦截器链
 			List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);
 
 			// Check whether we have any advice. If we don't, we can fallback on direct
@@ -209,6 +210,23 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 				MethodInvocation invocation =
 						new ReflectiveMethodInvocation(proxy, target, method, args, targetClass, chain);
 				// Proceed to the joinpoint through the interceptor chain.
+				// 2. 执行拦截器链
+				/**
+				 * 1.暴露出来interceptor
+				 * @see org.springframework.aop.interceptor.ExposeInvocationInterceptor#invoke(MethodInvocation)
+				 * 2.环绕通知
+				 * @see org.springframework.aop.aspectj.AspectJAroundAdvice#invoke(MethodInvocation)
+				 * 3.前置通知
+				 * @see org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor#invoke(MethodInvocation)
+				 * 		@see org.springframework.aop.aspectj.AspectJMethodBeforeAdvice
+				 * 4.后置通知
+				 * @see org.springframework.aop.aspectj.AspectJAfterAdvice#invoke(MethodInvocation)
+				 * 5.返回结果通知
+				 * @see org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor#invoke(MethodInvocation)
+				 * 		@see org.springframework.aop.aspectj.AspectJAfterReturningAdvice
+				 * 6.异常通知
+				 * @see org.springframework.aop.aspectj.AspectJAfterThrowingAdvice#invoke(MethodInvocation) 
+				 */
 				retVal = invocation.proceed();
 			}
 

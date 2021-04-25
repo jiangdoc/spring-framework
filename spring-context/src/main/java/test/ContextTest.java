@@ -11,6 +11,9 @@ public class ContextTest {
 	public static void main(String[] args) {
 		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		final UserService bean = context.getBean(UserService.class);
-		System.out.println(bean.speak(232L));
+		bean.speak(232L);
+		final GoodsService goodsService = context.getBean(GoodsService.class);
+		goodsService.list();
+		goodsService.saveGood();
 	}
 }
