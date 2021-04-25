@@ -1,4 +1,4 @@
-package test;
+package com.my.test.service;
 
 /**
  * @author jiangwenjie

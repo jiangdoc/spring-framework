@@ -1,4 +1,4 @@
-package test;
+package com.my.test;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan({"test"})
+@ComponentScan({"com.my.test.service"})
 public class AppConfig {
 }

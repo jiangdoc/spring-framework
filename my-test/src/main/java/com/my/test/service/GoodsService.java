@@ -1,8 +1,9 @@
-package test;
+package com.my.test.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 /**
  * @author jiangwenjie
@@ -15,7 +16,7 @@ public class GoodsService {
 		return "商品列表：{[\"name\":\"apple\",\"price\":2999],[\"name\":\"apple\",\"price\":2999]}";
 	}
 
-	@Transactional(value = Transactional.TxType.REQUIRES_NEW)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public Boolean saveGood(){
 		System.out.println("插入。。。。。。");
 		return Boolean.TRUE;

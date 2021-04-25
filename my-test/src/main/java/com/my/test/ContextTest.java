@@ -1,5 +1,7 @@
-package test;
+package com.my.test;
 
+import com.my.test.service.GoodsService;
+import com.my.test.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

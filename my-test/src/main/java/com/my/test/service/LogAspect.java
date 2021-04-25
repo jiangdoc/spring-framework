@@ -1,4 +1,4 @@
-package test;
+package com.my.test.service;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LogAspect {
-	@Pointcut("execution(public * test.*.*(..))")
+	@Pointcut("execution(public * com.my.test.service.*.*(..))")
 	public void serviceMethod() {
 	}
 
