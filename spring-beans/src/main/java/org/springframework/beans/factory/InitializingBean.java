@@ -16,6 +16,8 @@
 
 package org.springframework.beans.factory;
 
+import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
+
 /**
  * Interface to be implemented by beans that need to react once all their properties
  * have been set by a {@link BeanFactory}: e.g. to perform custom initialization,
@@ -34,6 +36,9 @@ package org.springframework.beans.factory;
 public interface InitializingBean {
 
 	/**
+	 * bean初始化的时候会执行对应实现类的此方法。
+	 * @see AbstractAutowireCapableBeanFactory#invokeInitMethods(java.lang.String, java.lang.Object, org.springframework.beans.factory.support.RootBeanDefinition)
+	 *
 	 * Invoked by the containing {@code BeanFactory} after it has set all bean properties
 	 * and satisfied {@link BeanFactoryAware}, {@code ApplicationContextAware} etc.
 	 * <p>This method allows the bean instance to perform validation of its overall

@@ -594,7 +594,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		Object exposedObject = bean;
 		try {
 			// 2.属性注入 ：如果实现了 执行Aware
-
 			populateBean(beanName, mbd, instanceWrapper);
 			// 3. 初始化 : 如果实现了代理，这里代理对象会替换真实对象
 			exposedObject = initializeBean(beanName, exposedObject, mbd);
@@ -1801,7 +1800,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 
 		try {
-			// 2.初始化方法
+			/**
+			 * 2.初始化方法
+			 * 会执行继承了InitializingBean.afterPropertiesSet()的方法
+			 */
 			invokeInitMethods(beanName, wrappedBean, mbd);
 		}
 		catch (Throwable ex) {
@@ -1872,6 +1874,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 				}
 			}
 			else {
+				/**
+				 * InitializingBean.afterPropertiesSet()方法
+				 */
 				((InitializingBean) bean).afterPropertiesSet();
 			}
 		}
