@@ -1379,15 +1379,20 @@ public class BeanDefinitionParserDelegate {
 	 */
 	@Nullable
 	public BeanDefinition parseCustomElement(Element ele, @Nullable BeanDefinition containingBd) {
+		//获取节点的NamespaceURI, 如果当前节点是dubbo:application 那么就是根据dubbo找到
+		//xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" 后面的uri
 		String namespaceUri = getNamespaceURI(ele);
 		if (namespaceUri == null) {
 			return null;
 		}
+		//这里的resolve方法，会加载spring.handlers文件，调用namespaceHandler.init();获取当前节点对应的handler解析器
 		NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);
 		if (handler == null) {
 			error("Unable to locate Spring NamespaceHandler for XML schema namespace [" + namespaceUri + "]", ele);
 			return null;
 		}
+		//parse方法会先根据element的名称获取对应的BeanDefinitionParser
+		//比如当前元素是dubbo:application, 这里会用application作为key去获取对应的解析器，然后调用其parse方法
 		return handler.parse(ele, new ParserContext(this.readerContext, this, containingBd));
 	}
 

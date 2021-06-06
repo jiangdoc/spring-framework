@@ -80,6 +80,7 @@ public class XmlWebApplicationContext extends AbstractRefreshableWebApplicationC
 	@Override
 	protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throws BeansException, IOException {
 		// Create a new XmlBeanDefinitionReader for the given BeanFactory.
+		//为BeanFactory创建一个XmlBeanDefinitionReader
 		XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
 
 		// Configure the bean definition reader with this context's
@@ -121,6 +122,7 @@ public class XmlWebApplicationContext extends AbstractRefreshableWebApplicationC
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws IOException {
 		String[] configLocations = getConfigLocations();
 		if (configLocations != null) {
+			// 遍历你contextConfigLocation配置的多个xml文件
 			for (String configLocation : configLocations) {
 				reader.loadBeanDefinitions(configLocation);
 			}
