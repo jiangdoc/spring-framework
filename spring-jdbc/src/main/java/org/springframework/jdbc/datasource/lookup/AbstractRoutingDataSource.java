@@ -30,6 +30,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
+ * 多数据源切换
  * Abstract {@link javax.sql.DataSource} implementation that routes {@link #getConnection()}
  * calls to one of various target DataSources based on a lookup key. The latter is usually
  * (but not necessarily) determined through some thread-bound transaction context.
@@ -42,9 +43,15 @@ import org.springframework.util.Assert;
  */
 public abstract class AbstractRoutingDataSource extends AbstractDataSource implements InitializingBean {
 
+	/**
+	 * 多数据源MAP
+	 */
 	@Nullable
-	private Map<Object, Object> targetDataSources;
+	private Map<Object/*数据源Key*/, Object/*DataSource*/> targetDataSources;
 
+	/**
+	 * 默认的数据源
+	 */
 	@Nullable
 	private Object defaultTargetDataSource;
 
@@ -114,6 +121,9 @@ public abstract class AbstractRoutingDataSource extends AbstractDataSource imple
 	}
 
 
+	/**
+	 * 如果在程序运行中，自动添加新的数据源，需要调用此方法，通知spring容器更新
+	 */
 	@Override
 	public void afterPropertiesSet() {
 		if (this.targetDataSources == null) {
@@ -235,6 +245,7 @@ public abstract class AbstractRoutingDataSource extends AbstractDataSource imple
 	}
 
 	/**
+	 * 确定多数据源的Key，由业务代码去选择
 	 * Determine the current lookup key. This will typically be
 	 * implemented to check a thread-bound transaction context.
 	 * <p>Allows for arbitrary keys. The returned key needs

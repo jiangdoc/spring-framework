@@ -28,6 +28,19 @@ import javax.servlet.ServletContextListener;
  * constructor, allowing for programmatic configuration in Servlet 3.0+ environments.
  * See {@link org.springframework.web.WebApplicationInitializer} for usage examples.
  *
+ *
+ * spring项目启动，会在web.xml中配置，因为该类实现了ServletContextListener，所以Tomcat启动的时候会触发 contextInitialized方法
+ *
+ * web.xml
+ * ---------------------
+ * <context-param>
+ *		<param-name>contextConfigLocation</param-name>
+ *		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+ * </context-param>
+ * <listener>
+ *     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+ * </listener>
+ * ————————————————
  * @author Juergen Hoeller
  * @author Chris Beams
  * @since 17.02.2003

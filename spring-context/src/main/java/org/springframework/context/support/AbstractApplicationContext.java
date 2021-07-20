@@ -555,15 +555,18 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
+				// 为上下文初始化Message源，即不同语音的消息体
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
+				// 初始化应用消息广播器，并初始化"applicationEventMulticaster"bean
 				initApplicationEventMulticaster();
 
 				// 在上下文中刷新容器，Springboot 在此加载tomcat
 				onRefresh();
 
 				// Check for listener beans and register them.
+				// 在所有注册的bean中查找Listener bean,注册到消息广播器中
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
