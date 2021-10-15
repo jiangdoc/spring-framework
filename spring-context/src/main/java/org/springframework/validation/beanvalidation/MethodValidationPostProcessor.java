@@ -108,8 +108,15 @@ public class MethodValidationPostProcessor extends AbstractBeanFactoryAwareAdvis
 	}
 
 
+	/**
+	 * 如果添加了@Validate，bean初始化时候会创建 MethodValidationInterceptor
+	 */
 	@Override
 	public void afterPropertiesSet() {
+		/**
+		 * bean 初始化的后置处理器(PersistenceExceptionTranslationPostProcessor)中会使用isEligible判断是否需要创建代理对象
+		 * @see org.springframework.aop.framework.AbstractAdvisingBeanPostProcessor#isEligible(java.lang.Class)
+		 */
 		Pointcut pointcut = new AnnotationMatchingPointcut(this.validatedAnnotationType, true);
 		this.advisor = new DefaultPointcutAdvisor(pointcut, createMethodValidationAdvice(this.validator));
 	}

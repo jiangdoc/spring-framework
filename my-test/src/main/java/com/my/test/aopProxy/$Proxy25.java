@@ -14,7 +14,7 @@ import org.springframework.aop.TargetSource;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.AopConfigException;
 import org.springframework.core.DecoratingProxy;
-
+/*
 public final class $Proxy25 extends Proxy implements UserService, SpringProxy, Advised, DecoratingProxy {
 	private static Method m1;
 	private static Method m8;
@@ -374,3 +374,4 @@ public final class $Proxy25 extends Proxy implements UserService, SpringProxy, A
 		}
 	}
 }
+*/

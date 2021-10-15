@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LogAspect {
-	@Pointcut("execution(public * com.my.test.service.*.*(..))")
+	@Pointcut("execution(public * com.my.test.circularReferences.*.*(..))")
 	public void serviceMethod() {
 	}
 
